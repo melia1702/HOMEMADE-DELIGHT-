@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Homemade Delight</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #fff8e1; color: #4e342e; margin: 0; padding: 0; }
+    .navbar { background-color: #ffcc80; padding: 10px 0; margin-bottom: 20px; }
+    .navbar ul { list-style: none; display: flex; justify-content: center; gap: 30px; padding: 0; margin: 0; }
+    .navbar a { text-decoration: none; color: #4e342e; font-weight: bold; font-size: 16px; cursor: pointer; }
+    .navbar a:hover { color: #e65100; }
+    h1 { text-align: center; color: #e65100; }
+    .page { display: none; padding: 20px; }
+    .active { display: block; }
+    .produk-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 20px; }
+    .produk { background-color: #fff3e0; border: 1px solid #ffcc80; border-radius: 8px; padding: 10px; width: 180px; text-align: center; }
+    .produk img { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; }
+    form { max-width: 600px; margin: auto; background: #fff3e0; padding: 20px; border-radius: 10px; border: 1px solid #ffb74d; }
+    label { display: block; margin-top: 10px; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+    .jumlah-barang input { width: 80px; }
+    button { margin-top: 15px; padding: 10px 15px; border: none; border-radius: 6px; background-color: #ffb300; color: white; font-weight: bold; cursor: pointer; }
+    button:hover { background-color: #ffa000; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <ul>
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('produk')">Produk</a></li>
+      <li><a onclick="showPage('transaksi')">Transaksi</a></li>
+      <li><a onclick="showPage('kontak')">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <div id="home" class="page active">
+    <h1>Selamat Datang di Homemade Delight</h1>
+    <p style="text-align: center;">Nikmati camilan khas Minang buatan rumahan dengan rasa otentik dan kualitas terbaik!</p>
+  </div>
+
+  <div id="produk" class="page">
+    <h1>Produk Kami</h1>
+    <div class="produk-container">
+      <div class="produk"><img src="https://images.tokopedia.net/img/cache/700/VqbcmM/2022/7/18/e8c0b758-be85-4d0a-9be2-65e608355e2f.jpg"><p>Rakik</p></div>
+      <div class="produk"><img src="https://img.lazcdn.com/g/p/cbdca60c088b3307adf9d32b88d31a21.png"><p>Keripik Balado</p></div>
+      <div class="produk"><img src="https://cdn.rri.co.id/berita/Bukittinggi/o/1717548899466-jangek/x75g5rfyf7q22dx.jpeg"><p>Karupuak Jangek</p></div>
+      <div class="produk"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVwqn6PWjeoVD1Cy7T7R5m9wVF_uFeRM7iSA"><p>Keripik Sanjai</p></div>
+      <div class="produk"><img src="https://www.kabarsumbar.com/wp-content/uploads/2021/10/18.-karak-kaliang.jpg"><p>Karak Kaliang</p></div>
+    </div>
+  </div>
+
+  <div id="transaksi" class="page">
+    <h1>Homemade Delight - Form Pemesanan</h1>
+    <form method="POST" action="simpan_pesanan.php">
+      <label>Nama Lengkap:</label>
+      <input type="text" name="nama" required>
+      <label>Nomor Telepon:</label>
+      <input type="tel" name="telepon" required>
+      <label>Alamat Pengiriman:</label>
+      <input type="text" name="alamat" required>
+      <label>Mode Transaksi:</label>
+      <select name="transaksiMode">
+        <option value="COD">COD</option>
+        <option value="Transfer">Transfer Bank</option>
+        <option value="QRIS">QRIS</option>
+      </select>
+      <fieldset class="jumlah-barang">
+        <legend><strong>Jumlah Pesanan per Produk</strong></legend>
+        <label>Rakik (Rp10.000): <input type="number" name="rakik" min="0" value="0"></label>
+        <label>Keripik Balado (Rp12.000): <input type="number" name="balado" min="0" value="0"></label>
+        <label>Karupuak Jangek (Rp20.000): <input type="number" name="jangek" min="0" value="0"></label>
+        <label>Keripik Sanjai (Rp13.000): <input type="number" name="sanjai" min="0" value="0"></label>
+        <label>Karak Kaliang (Rp15.000): <input type="number" name="karak" min="0" value="0"></label>
+      </fieldset>
+      <button type="submit">Pesan</button>
+      <button type="reset">Reset</button>
+    </form>
+  </div>
+
+  <div id="kontak" class="page">
+    <h1>Hubungi Kami</h1>
+    <p style="text-align: center;">Jika Anda memiliki pertanyaan atau ingin memesan secara langsung, silakan hubungi:</p>
+    <ul style="text-align: center; list-style: none;">
+      <li>📞 WA: <a href="https://wa.me/qr/AXGNDJGWGVCEP1" target="_blank">Klik untuk Chat via WhatsApp</a></li>
+      <li>📧 Email: homemade@delight.id</li>
+      <li>📍 Alamat: Padang, Sumatera Barat</li>
+    </ul>
+  </div>
+
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+    }
+  </script>
+
+  
+</body>
+</html>
